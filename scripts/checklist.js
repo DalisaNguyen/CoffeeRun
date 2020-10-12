@@ -23,6 +23,7 @@
             this.removeRow(coffeeOrder.emailAddress);
 
             var rowElement = new Row(coffeeOrder);
+
             this.$element.append(rowElement.$element);
         }
         removeRow(email) {
@@ -40,6 +41,7 @@
                 'data-coffee-order': 'checkbox',
                 'class': 'checkbox'
             });
+
             var $label = $('<label></label>');
 
             var $checkbox = $('<input></input>', {
@@ -63,6 +65,5 @@
     }
 
     App.CheckList = CheckList;
-    // App.Row = Row;
     window.App = App;
 })(window);

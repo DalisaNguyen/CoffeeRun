@@ -9,15 +9,15 @@
             this.db = db;
         }
         createOrder(order) {
-            console.log(`Adding order for ${order.emailAddress}`);
+            console.log('Adding order for ${order.emailAddress}');
             this.db.add(order.emailAddress, order);
         }
         deliverOrder(customerId) {
-            console.log(`Delivering order for ${customerId}`);
+            console.log('Delivering order for ${customerId}');
         }
         printOrder() {
             var customerIdArray = Object.keys(this.db.getAll());
-            console.log(`Truck #${this.truckId} has pending orders:`);
+            console.log('Truck #${this.truckId} has pending orders:');
 
             customerIdArray.forEach(function (id) {
                 console.log(this.db.get(id));

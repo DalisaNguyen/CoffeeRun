@@ -1,12 +1,10 @@
 (function (window) {
     'use strict';
-    var FORM_SELECTOR = '[data-coffee-order="form"]';
     var App = window.App || {};
     var $ = window.jQuery;
 
     class FormHandler {
         constructor(selector) {
-            // code will go here
             console.log('Inside FormHandler');
             if (!selector) {
                 throw new Error('No selector provided');
@@ -28,21 +26,24 @@
                     console.log(item.name + ' is ' + item.value);
                 });
 
-                $('#modal-body')
-                    .html(() => {
-                        return `
-                            <p>Coffee: ${data.coffee}</p>
-                            <p>Email: ${data.emailAddress}</p>
-                            <p>Flavor: ${data.flavor}</p>
-                            <p>Strength: ${data.strength}</p>
-                        `;
-                    });
-                $("#myModal").modal();
-
                 console.log(`DATA: ${JSON.stringify(data)}`);
                 fn(data);
                 this.reset();
                 this.elements[0].focus();
+            });
+        }
+
+        addInputHandler(fn) {
+            console.log('Setting input handler for form');
+            this.$formElement.on('input', '[name="emailAddress"]', function (event) {
+                var emailAddress = event.target.value;
+                var message = '';
+                if (fn(emailAddress)) {
+                    event.target.setCustomValidity('');
+                } else {
+                    message = emailAddress + ' is not an authorized email address!'
+                    event.target.setCustomValidity(message);
+                }
             });
         }
     }
